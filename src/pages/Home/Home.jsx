@@ -1,11 +1,11 @@
-import React from 'react';
+import TopSlider from "./TopSlider";
 
 const Home = () => {
-    return (
-        <div>
-            <h1 className='p-4 text-white bg-indigo-500 rounded-lg'>Home</h1>
-        </div>
-    );
+  return (
+    <div>
+      <TopSlider></TopSlider>
+    </div>
+  );
 };
 
 export default Home;
