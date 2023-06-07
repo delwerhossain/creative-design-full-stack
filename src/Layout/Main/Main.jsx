@@ -7,7 +7,7 @@ const Main = () => {
     <div className="bg-white">
       <Navbar />
       {/* outlet part  */}
-      <div className="h-screen">
+      <div className="">
         <Outlet></Outlet>
       </div>
       <Footer />
