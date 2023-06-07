@@ -4,7 +4,7 @@ import Footer from "../../pages/common/Footer/Footer";
 
 const Main = () => {
   return (
-    <div className="">
+    <div className="bg-white">
       <Navbar />
       {/* outlet part  */}
       <div className="h-screen">
