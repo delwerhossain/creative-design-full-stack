@@ -23,7 +23,7 @@ const Navbar = () => {
     <>
       <ul className="menu bg-base-200 lg:menu-horizontal rounded-box">
         <li>
-          <a>
+          <Link to={'/test'}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -40,10 +40,10 @@ const Navbar = () => {
             </svg>
             Inbox
             <span className="badge badge-sm">99+</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a>
+         <Link to={'/'}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -60,7 +60,7 @@ const Navbar = () => {
             </svg>
             Updates
             <span className="badge badge-sm badge-warning">NEW</span>
-          </a>
+     </Link>
         </li>
         <li>
           <a>

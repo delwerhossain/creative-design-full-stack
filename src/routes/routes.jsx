@@ -4,6 +4,8 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home";
 import Login from "../pages/AuthenticationPage/Login";
 import Register from "../pages/AuthenticationPage/Register";
+import Test from "../pages/Test/Test";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +16,15 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/test",
+        element: (
+          <PrivateRoute>
+            {" "}
+            <Test />{" "}
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
