@@ -114,7 +114,16 @@ const Navbar = () => {
             {menuList}
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+        <Link className="normal-case text-xl flex items-center justify-center">
+          {/* logo */}
+          <img
+            loading="lazy"
+            className="md:w-36  w-20 mr-2 rounded-xl "
+            src="https://shorturl.at/dhH27"
+            alt=""
+          />
+        
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">{menuList}</div>
       <div className="navbar-end">
