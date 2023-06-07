@@ -6,7 +6,7 @@ import { updateProfile } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 
 const Register = () => {
-  const { createUser,  signInWithGit, googleSignIn } =
+  const { createUser,  gitSignIn, googleSignIn } =
     useContext(AuthContext);
   // state
   const [error, setError] = useState("");
@@ -60,7 +60,7 @@ const Register = () => {
       });
   };
   const handleGitPopup = () => {
-     signInWithGit()
+     gitSignIn()
       .then(() => {
         setError("");
         setSuccess("successfully registered with Git ");

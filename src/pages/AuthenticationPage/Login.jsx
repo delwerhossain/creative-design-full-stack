@@ -5,7 +5,7 @@ import { AuthContext } from "../../provider/AuthProvider";
 
 const Login = () => {
   // context api
-  const { signIn, googleSignIn, signInWithGit } = useContext(AuthContext);
+  const { signIn, googleSignIn, gitSignIn } = useContext(AuthContext);
   // location
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -50,7 +50,7 @@ const Login = () => {
       });
   };
   const handleGitPopup = () => {
-    return signInWithGit()
+    return gitSignIn()
       .then(() => {
         setError("");
         setSuccess("login success - Google");
