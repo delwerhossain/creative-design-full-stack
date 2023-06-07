@@ -8,7 +8,7 @@ import { IconContext } from "react-icons/lib";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
-  const [dark , setDark] = useState(false)
+  const [dark, setDark] = useState(false);
 
   const handleSignOut = () => {
     return logOut()
@@ -16,14 +16,13 @@ const Navbar = () => {
         // Sign-out successful.
         localStorage.removeItem("jwt");
       })
-      .catch(() => {
-      });
+      .catch(() => {});
   };
   const menuList = (
     <>
       <ul className="menu bg-base-200 lg:menu-horizontal rounded-box">
         <li>
-          <Link to={'/test'}>
+          <Link to={"/test"}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -43,7 +42,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-         <Link to={'/'}>
+          <Link to={"/"}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -60,7 +59,7 @@ const Navbar = () => {
             </svg>
             Updates
             <span className="badge badge-sm badge-warning">NEW</span>
-     </Link>
+          </Link>
         </li>
         <li>
           <a>
@@ -102,47 +101,47 @@ const Navbar = () => {
       </div>
       <div className="navbar-center hidden lg:flex">{menuList}</div>
       <div className="navbar-end">
-          {/* dark mode  */}
-          <button
-            onClick={() => setDark(!dark)}
-            className="btn   btn-ghost btn-circle"
-          >
-            <IconContext.Provider value={{ size: "2em" }}>
-             {dark? <MdDarkMode /> :
-              <BsLightbulb />}
-            </IconContext.Provider>
-          </button>
-          {user && (
-            <>
-              <div
-                className="tooltip tooltip-bottom "
-                data-tip={user?.displayName}
-              >
-                <img
-                  loading="lazy"
-                  className="w-12 mr-1 rounded-full"
-                  src={user?.photoURL}
-                  alt={user?.displayName}
-                  title={user?.displayName}
-                />
+        {/* dark mode  */}
+        <button
+          onClick={() => setDark(!dark)}
+          className="btn   btn-ghost btn-circle"
+        >
+          <IconContext.Provider value={{ size: "2em" }}>
+            {dark ? <MdDarkMode /> : <BsLightbulb />}
+          </IconContext.Provider>
+        </button>
+        {user ? (
+          <>
+            <div
+              className="tooltip tooltip-bottom "
+              data-tip={user?.displayName}
+            >
+              <img
+                loading="lazy"
+                className="w-12 mr-1 rounded-full"
+                src={user?.photoURL}
+                alt={user?.displayName}
+                title={user?.displayName}
+              />
+            </div>
+            <div className="tooltip tooltip-bottom " data-tip="log Out">
+              <div onClick={handleSignOut} className="btn   btn-primary p-2">
+                <FiLogOut title="logOut"></FiLogOut>
               </div>
-              <div className="tooltip tooltip-bottom " data-tip="log Out">
-                <div onClick={handleSignOut} className="btn   btn-primary p-2">
-                  <FiLogOut title="logOut"></FiLogOut>
-                </div>
-              </div>
-            </>
-          )}
-
+            </div>
+          </>
+        ) : (
           <div className="tooltip tooltip-bottom " data-tip="log In">
-            {!user && (
-              <Link className="btn btn-primary btn-md btn-outline font-semibold p-2" to={"/login"}>
-                <span className="mr-1 ">LogIn</span>
-                <FiLogIn title="logOut"></FiLogIn>
-              </Link>
-            )}
+            <Link
+              className="btn btn-primary btn-md btn-outline font-semibold p-2"
+              to={"/login"}
+            >
+              <span className="mr-1 ">LogIn</span>
+              <FiLogIn title="logOut"></FiLogIn>
+            </Link>
           </div>
-        </div>
+        )}
+      </div>
     </div>
   );
 };
