@@ -1,6 +1,7 @@
 import  { useEffect, useRef } from "react";
 import Parallax from "parallax-js";
 import "./error.scss";
+import { Link } from "react-router-dom";
 
 const ErrorPage = () => {
   const sceneRef = useRef(null);
@@ -37,26 +38,6 @@ const ErrorPage = () => {
         </a>
         <a className="bg_links logo"></a>
       </div>
-
-      <nav>
-        <div className="menu">
-          <p className="website_name">LOGO</p>
-          <div className="menu_links">
-            <a href="" className="link">
-              about
-            </a>
-            <a href="" className="link">
-              projects
-            </a>
-            <a href="" className="link">
-              contacts
-            </a>
-          </div>
-          <div className="menu_icon">
-            <span className="icon"></span>
-          </div>
-        </div>
-      </nav>
 
       <section className="wrapper">
         <div className="container">
@@ -106,7 +87,10 @@ const ErrorPage = () => {
                 Uh oh! Looks like you got lost. Go back to the homepage if you
                 dare!
               </p>
-              <button>i dare!</button>
+              <button>
+                {" "}
+                <Link to={"/"}>back to Home</Link>
+              </button>
             </article>
           </div>
         </div>

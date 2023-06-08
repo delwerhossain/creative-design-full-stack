@@ -7,13 +7,14 @@ const Main = () => {
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
   );
+  
 
   return (
     <div className="">
       <Navbar />
       {/* outlet part  */}
       <div
-        className={`h-screen  dark:bg-slate-700 bg-slate-100 ${
+        className={`dark:bg-slate-700 bg-slate-100 ${
           !(theme == "light") && "dark"
         }`}
       >
