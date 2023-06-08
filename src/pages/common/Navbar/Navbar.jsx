@@ -39,7 +39,7 @@ const Navbar = () => {
     <>
       <ul className="menu bg-base-200 lg:menu-horizontal rounded-box">
         <li>
-          <Link to={"/test"}>
+          <Link to={"/"}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -59,7 +59,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link to={"/"}>
+          <Link to={"/all-classes"}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -74,16 +74,18 @@ const Navbar = () => {
                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            Updates
+            All-Classes
             <span className="badge badge-sm badge-warning">NEW</span>
           </Link>
         </li>
-        <li>
-          <a>
-            Stats
-            <span className="badge badge-xs badge-info"></span>
-          </a>
-        </li>
+        {user && (
+          <li>
+            <Link to={"/dashboard/"}>
+              Dashboard
+              <span className="badge badge-xs badge-info"></span>
+            </Link>
+          </li>
+        )}
       </ul>
     </>
   );

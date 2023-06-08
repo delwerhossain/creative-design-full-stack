@@ -49,6 +49,10 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
+        path: "/dashboard/",
+        element: <SelectClass />,
+      },
+      {
         path: "select-classes",
         element: <SelectClass />,
       },
