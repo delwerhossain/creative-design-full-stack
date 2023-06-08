@@ -39,11 +39,11 @@ const Register = () => {
           displayName: name,
           photoURL: pic,
         })
-          .then(() => {})
-          .catch(() => {
+          .then(() => {
             userInsert(name, email, pic);
             window.location.reload(true);
-          });
+          })
+          .catch(() => {});
         setError("");
       })
       .catch((error) => {
@@ -55,7 +55,6 @@ const Register = () => {
   const handleGooglePopup = () => {
     googleSignIn()
       .then((result) => {
-        console.log(result.user.displayName, result.user.email);
         setError("");
         userInsert(
           result.user.displayName,
@@ -74,7 +73,6 @@ const Register = () => {
   const handleGitPopup = () => {
     gitSignIn()
       .then((result) => {
-        console.log(result.user.displayName, result.user.email);
         userInsert(
           result.user.displayName,
           result.user.email,

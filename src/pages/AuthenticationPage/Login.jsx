@@ -27,7 +27,6 @@ const Login = () => {
         navigate(from, { replace: true });
       })
       .catch((error) => {
-        console.log(error);
         setError(error.message);
         setSuccess("");
       });
@@ -36,8 +35,6 @@ const Login = () => {
   const handleGooglePopup = () => {
     return googleSignIn()
       .then((result) => {
-        const user = result.user;
-        console.log(user);
         setError("");
         setSuccess("login success - Google");
         userInsert(
@@ -59,7 +56,6 @@ const Login = () => {
     return gitSignIn()
       .then((result) => {
         setError("");
-        console.log(result.user);
         setSuccess("login success - Google");
         userInsert(
           result.user.displayName,
