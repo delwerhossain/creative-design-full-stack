@@ -2,6 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import Loading from "../../Components/Loading/Loading";
 import { AuthContext } from "../../provider/AuthProvider";
+import { userInsert } from "./commonAuth";
 
 const Login = () => {
   // context api
@@ -39,6 +40,11 @@ const Login = () => {
         console.log(user);
         setError("");
         setSuccess("login success - Google");
+        userInsert(
+          result.user.displayName,
+          result.user.email,
+          result.user.photoURL
+        );
         navigate(from, { replace: true });
       })
       .catch((error) => {
@@ -51,9 +57,15 @@ const Login = () => {
   };
   const handleGitPopup = () => {
     return gitSignIn()
-      .then(() => {
+      .then((result) => {
         setError("");
+        console.log(result.user);
         setSuccess("login success - Google");
+        userInsert(
+          result.user.displayName,
+          result.user.email,
+          result.user.photoURL
+        );
         navigate(from, { replace: true });
       })
       .catch((error) => {

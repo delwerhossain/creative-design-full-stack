@@ -1,18 +1,25 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import Loading from "../../Components/Loading/Loading";
 import { updateProfile } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
+import { useForm } from "react-hook-form";
+import { userInsert } from "./commonAuth";
 
 const Register = () => {
-  const { createUser,  gitSignIn, googleSignIn } =
-    useContext(AuthContext);
+  const { createUser, gitSignIn, googleSignIn } = useContext(AuthContext);
   // state
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [show, setShow] = useState(false);
   const [accept, setAccept] = useState(false);
+  const navigate = useNavigate();
+
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  // database user insert
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -25,6 +32,7 @@ const Register = () => {
       setError("confirm password not correct");
       return;
     }
+
     createUser(email, password)
       .then((result) => {
         updateProfile(result.user, {
@@ -33,13 +41,10 @@ const Register = () => {
         })
           .then(() => {})
           .catch(() => {
-            // An error occurred
-            // ...
+            userInsert(name, email, pic);
+            window.location.reload(true);
           });
         setError("");
-        toast.success("successfully registered");
-        setSuccess("successfully registered---");
-        window.location.reload(true);
       })
       .catch((error) => {
         console.error(error);
@@ -49,9 +54,16 @@ const Register = () => {
   };
   const handleGooglePopup = () => {
     googleSignIn()
-      .then(() => {
+      .then((result) => {
+        console.log(result.user.displayName, result.user.email);
         setError("");
+        userInsert(
+          result.user.displayName,
+          result.user.email,
+          result.user.photoURL
+        );
         setSuccess("successfully registered with Google");
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         console.error(error);
@@ -60,10 +72,17 @@ const Register = () => {
       });
   };
   const handleGitPopup = () => {
-     gitSignIn()
-      .then(() => {
+    gitSignIn()
+      .then((result) => {
+        console.log(result.user.displayName, result.user.email);
+        userInsert(
+          result.user.displayName,
+          result.user.email,
+          result.user.photoURL
+        );
         setError("");
         setSuccess("successfully registered with Git ");
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         console.error(error);
