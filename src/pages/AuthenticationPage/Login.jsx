@@ -1,12 +1,12 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
 import Loading from "../../Components/Loading/Loading";
-import { AuthContext } from "../../provider/AuthProvider";
 import { userInsert } from "./commonAuth";
+import useAuth from "../../hooks/useAuth";
+import { useEffect, useState } from "react";
 
 const Login = () => {
   // context api
-  const { signIn, googleSignIn, gitSignIn } = useContext(AuthContext);
+  const { signIn, googleSignIn, gitSignIn } = useAuth();
   // location
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";

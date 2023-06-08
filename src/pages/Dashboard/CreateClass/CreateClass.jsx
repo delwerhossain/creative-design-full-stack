@@ -1,6 +1,4 @@
-
-
-const Dashboard = () => {
+const CreateClass = () => {
     return (
         <div>
             
@@ -8,4 +6,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default CreateClass;

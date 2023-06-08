@@ -1,14 +1,14 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../provider/AuthProvider";
+import {  useEffect, useState } from "react";
 import Loading from "../../Components/Loading/Loading";
 import { updateProfile } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import { userInsert } from "./commonAuth";
+import useAuth from "../../hooks/useAuth";
 
 const Register = () => {
-  const { createUser, gitSignIn, googleSignIn } = useContext(AuthContext);
+  const { createUser, gitSignIn, googleSignIn } = useAuth();
   // state
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
