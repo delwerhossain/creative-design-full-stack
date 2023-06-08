@@ -38,7 +38,7 @@ const TopSlider = () => {
           className="mySwiper"
         >
           <SwiperSlide>
-            <div className="absolute text-4xl bg-slate-300 py-12 px-8 rounded-3xl w-1/4 left-16 bottom-1/4 text-slate-50 font-bold">
+            <div className="absolute text-4xl  dark:bg-slate-800 dark:text-red-600  bg-slate-50 py-12 px-8 rounded-3xl w-1/4 left-16 bottom-1/4 text-slate-50 font-bold">
               <h1 className="text-2xl   border">
                 This is
               </h1>{" "}
