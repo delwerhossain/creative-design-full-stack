@@ -8,9 +8,10 @@ const Main = () => {
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
   );
   
+  const local = localStorage.getItem("theme");
   useEffect(() => {
     setTheme(localStorage.getItem("theme"));
-  }, [localStorage.getItem("theme")]);
+  }, [local]);
 
   return (
     <div className="">
@@ -18,7 +19,7 @@ const Main = () => {
       {/* outlet part  */}
       <div
         className={`dark:bg-slate-700 bg-slate-100 ${
-          !(theme == "light") && "dark"
+          (theme == "dark") && "dark"
         }`}
       >
         <Outlet></Outlet>
