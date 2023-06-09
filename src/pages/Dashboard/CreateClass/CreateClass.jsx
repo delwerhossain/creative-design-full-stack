@@ -34,6 +34,7 @@ const CreateClass = () => {
     axiosSecure.post(`/create-class`, classDetails).then((data) => {
       console.log(data);
       if (data.data.insertedId) {
+        document.getElementById("myform").reset();
         Swal.fire({
           title: "success",
           text: "class Added Successfully",
