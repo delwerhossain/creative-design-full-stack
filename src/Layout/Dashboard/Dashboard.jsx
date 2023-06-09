@@ -106,11 +106,13 @@ const Dashboard = () => {
       <div className="drawer-content">
         <label
           htmlFor="my-drawer-2"
-          className="btn btn-primary drawer-button lg:hidden"
+          className=" mt-4 ml-4 btn btn-primary drawer-button lg:hidden"
         >
           Open drawer
         </label>
-        <Outlet></Outlet>
+        <div className="bg-white ">
+          <Outlet></Outlet>
+        </div>
       </div>
       <div className="drawer-side text-white font-semibold bg-[#014bcc]">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
