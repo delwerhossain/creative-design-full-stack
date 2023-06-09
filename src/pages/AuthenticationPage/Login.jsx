@@ -21,9 +21,14 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     signIn(email, password)
-      .then(() => {
+      .then((result) => {
         setSuccess("login success");
         setError("");
+        userInsert(
+          result.user.displayName,
+          result.user.email,
+          result.user.photoURL
+        );
         navigate(from, { replace: true });
       })
       .catch((error) => {
