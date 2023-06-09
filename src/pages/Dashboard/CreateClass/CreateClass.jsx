@@ -1,20 +1,23 @@
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "./../../../hooks/useAuth";
 import Swal from "sweetalert2";
 
 const CreateClass = () => {
   const { user } = useAuth();
+  const [axiosSecure] = useAxiosSecure();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
-    //   const vCategory = event.target.subCategory.value;
     const name = form.name.value;
     const pictureURL = form.pictureURL.value;
     const instructorName = form.instructorName.value;
     const instructorEmail = form.instructorEmail.value;
     const subCategory = form.subCategory.value;
-    const price = form.price.value;
-    const availableQuantity = form.availableQuantity.value;
+    const price = parseFloat(form.price.value);
+    const availableQuantity = parseInt(form.availableQuantity.value);
+    const status = "pending";
+    const feedback = "";
 
     const classDetails = {
       name,
@@ -24,31 +27,23 @@ const CreateClass = () => {
       subCategory,
       price,
       availableQuantity,
+      status,
+      feedback,
     };
     // sent data to backend
-    fetch(`http://localhost:5000/create-class`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(classDetails),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.insertedId) {
-          Swal.fire({
-            title: "success",
-            text: "class Added Successfully",
-            showDenyButton: true,
-            showCancelButton: true,
-            icon: "success",
-            confirmButtonText: "Cool",
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    axiosSecure.post(`/create-class`, classDetails).then((data) => {
+      console.log(data);
+      if (data.data.insertedId) {
+        Swal.fire({
+          title: "success",
+          text: "class Added Successfully",
+          showDenyButton: true,
+          showCancelButton: true,
+          icon: "success",
+          confirmButtonText: "Cool",
+        });
+      }
+    });
   };
   return (
     <div className="md:w-6/12 w-10/12 mx-auto my-16">
