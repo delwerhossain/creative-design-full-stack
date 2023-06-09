@@ -53,7 +53,7 @@ const Dashboard = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/dashboard/addItem">
+        <NavLink to="/dashboard/create-class">
           {" "}
           <FaUtensils></FaUtensils> Add a Class
         </NavLink>
@@ -74,7 +74,7 @@ const Dashboard = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/dashboard/history">
+          <NavLink to="/dashboard/payment-history">
             <FaWallet></FaWallet> Payment History
           </NavLink>
         </li>
@@ -148,7 +148,7 @@ const Dashboard = () => {
               </NavLink>{" "}
             </li>
             <li>
-              <NavLink to="/menu"> All Classes</NavLink>
+              <NavLink to="/all-classes"> All Classes</NavLink>
             </li>
             <li>
               <button onClick={handleLogout}> Logout</button>
