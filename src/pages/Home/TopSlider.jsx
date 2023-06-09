@@ -21,7 +21,7 @@ const TopSlider = () => {
   };
   return (
     <>
-      <div className="lg:h-[700px] md:h-[500px] h-[400px]">
+      <div className="2xl:h-[800px] xl:h-[700px] lg:h-[600px] md:h-[500px] h-[400px]">
         <Swiper
           spaceBetween={30}
           centeredSlides={true}
@@ -39,9 +39,7 @@ const TopSlider = () => {
         >
           <SwiperSlide>
             <div className="absolute text-4xl  dark:bg-slate-800 dark:text-red-600  bg-slate-50 py-12 px-8 rounded-3xl w-1/4 left-16 bottom-1/4 text-slate-50 font-bold">
-              <h1 className="text-2xl   border">
-                This is
-              </h1>{" "}
+              <h1 className="text-2xl   border">This is</h1>{" "}
               <div className="border-b-8 ">Creative Design School</div>
             </div>
             {/* change */}
