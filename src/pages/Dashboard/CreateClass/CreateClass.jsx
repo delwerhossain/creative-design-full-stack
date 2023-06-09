@@ -16,6 +16,7 @@ const CreateClass = () => {
     const subCategory = form.subCategory.value;
     const price = parseFloat(form.price.value);
     const availableQuantity = parseInt(form.availableQuantity.value);
+    const enrolled = 0;
     const status = "pending";
     const feedback = "";
 
@@ -27,6 +28,7 @@ const CreateClass = () => {
       subCategory,
       price,
       availableQuantity,
+      enrolled,
       status,
       feedback,
     };
