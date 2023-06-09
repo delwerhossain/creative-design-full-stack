@@ -137,7 +137,7 @@ const CreateClass = () => {
             name="subCategory"
             className="select select-bordered"
           >
-            <option disabled selected>
+            <option  disabled defaultValue={''}  >
               Pick one
             </option>
 
