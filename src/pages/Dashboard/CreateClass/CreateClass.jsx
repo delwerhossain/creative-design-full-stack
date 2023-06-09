@@ -15,7 +15,6 @@ const CreateClass = () => {
     const subCategory = form.subCategory.value;
     const price = form.price.value;
     const availableQuantity = form.availableQuantity.value;
-    const description = form.description.value;
 
     const classDetails = {
       name,
@@ -25,7 +24,6 @@ const CreateClass = () => {
       subCategory,
       price,
       availableQuantity,
-      description,
     };
     // sent data to backend
     fetch(`http://localhost:5000/create-class`, {
