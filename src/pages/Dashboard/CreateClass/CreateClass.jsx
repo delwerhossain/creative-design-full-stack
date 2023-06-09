@@ -10,22 +10,20 @@ const CreateClass = () => {
     //   const vCategory = event.target.subCategory.value;
     const name = form.name.value;
     const pictureURL = form.pictureURL.value;
-    const sellerName = form.sellerName.value;
-    const sellerEmail = form.sellerEmail.value;
+    const instructorName = form.instructorName.value;
+    const instructorEmail = form.instructorEmail.value;
     const subCategory = form.subCategory.value;
     const price = form.price.value;
-    const rating = form.rating.value;
     const availableQuantity = form.availableQuantity.value;
     const description = form.description.value;
 
     const classDetails = {
       name,
       pictureURL,
-      sellerName,
-      sellerEmail,
+      instructorName,
+      instructorEmail,
       subCategory,
       price,
-      rating,
       availableQuantity,
       description,
     };
@@ -66,14 +64,14 @@ const CreateClass = () => {
             required
             defaultValue={user.email}
             type="text"
-            name="sellerEmail"
-            id="sellerEmail"
+            name="instructorEmail"
+            id="instructorEmail"
             className="block py-2.5 px-0 w-full text-sm text-black font-bold bg-transparent border-0 border-b-2 border-gray-700 appearance-none   focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             disabled
           />
           <label
-            htmlFor="sellerEmail"
+            htmlFor="instructorEmail"
             className="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             Email address
@@ -85,14 +83,14 @@ const CreateClass = () => {
             required
             defaultValue={user.displayName}
             type="text"
-            name="sellerName"
-            id="sellerName"
+            name="instructorName"
+            id="instructorName"
             className="block text-black font-bold py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-700 appearance-none   focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             disabled
           />
           <label
-            htmlFor="sellerName"
+            htmlFor="instructorName"
             className="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             Instructor Name
