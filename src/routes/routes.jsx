@@ -14,6 +14,7 @@ import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import ManageClass from "../pages/Dashboard/ManageClass/ManageClass";
 import InstructorClass from "../pages/Dashboard/InstructorClass/InstructorClass";
 import CreateClass from "../pages/Dashboard/CreateClass/CreateClass";
+import EnrolledClass from "../pages/Dashboard/EnrolledClass/EnrolledClass";
 
 export const router = createBrowserRouter([
   {
@@ -22,7 +23,7 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/", // Update the root path to an empty string
+        path: "/",
         element: <Home />,
       },
       {
@@ -47,14 +48,14 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     errorElement: <ErrorPage />,
-    children: [
-      {
-        path: "/dashboard/",
-        element: <SelectClass />,
-      },
+    children: [    
       {
         path: "select-classes",
         element: <SelectClass />,
+      },
+      {
+        path: "enrolled-classes",
+        element: <EnrolledClass />,
       },
       {
         path: "payment",

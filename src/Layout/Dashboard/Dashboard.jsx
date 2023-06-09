@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import {
   FaShoppingCart,
   FaWallet,
@@ -10,38 +10,36 @@ import {
 } from "react-icons/fa";
 import useAdmin from "../../hooks/useAdmin";
 import useInstructor from "../../hooks/useInstructor";
+import useAuth from "../../hooks/useAuth";
 
 const Dashboard = () => {
   // TODO: load data from the server to have dynamic isAdmin based on Data
   // const isAdmin = true;
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
+  const { logOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    return logOut()
+      .then(() => {
+        // Sign-out successful.
+        localStorage.removeItem("jwt");
+        navigate("/login");
+      })
+      .catch(() => {});
+  };
 
   const adminMenu = (
     <>
       <li>
-        <NavLink to="/dashboard/home">
-          <FaHome></FaHome> Admin Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/dashboard/addItem">
+        <NavLink to="/dashboard/manage-class">
           {" "}
-          <FaUtensils></FaUtensils> Add an Item
+          <FaUtensils></FaUtensils> Manage Class
         </NavLink>
       </li>
       <li>
-        <NavLink to="/dashboard/manageitems">
-          <FaWallet></FaWallet> Manage Items
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/dashboard/history">
-          <FaBook></FaBook> Manage Bookings
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/dashboard/allusers">
+        <NavLink to="/dashboard/all-users">
           <FaUsers></FaUsers> All Users
         </NavLink>
       </li>
@@ -50,29 +48,14 @@ const Dashboard = () => {
   const instructorMenu = (
     <>
       <li>
-        <NavLink to="/dashboard/home">
-          <FaHome></FaHome> Admin Home
+        <NavLink to="/dashboard/instructor-class">
+          <FaShoppingCart></FaShoppingCart> My classes
         </NavLink>
       </li>
       <li>
         <NavLink to="/dashboard/addItem">
           {" "}
-          <FaUtensils></FaUtensils> Add an Item
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/dashboard/manageitems">
-          <FaWallet></FaWallet> Manage Items
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/dashboard/history">
-          <FaBook></FaBook> Manage Bookings
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/dashboard/allusers">
-          <FaUsers></FaUsers> All Users
+          <FaUtensils></FaUtensils> Add a Class
         </NavLink>
       </li>
     </>
@@ -81,13 +64,13 @@ const Dashboard = () => {
     <>
       <>
         <li>
-          <NavLink to="/dashboard/home">
-            <FaHome></FaHome> User Home
+          <NavLink to="/dashboard/select-classes">
+            <FaShoppingCart></FaShoppingCart> Selected Classes
           </NavLink>
         </li>
         <li>
-          <NavLink to="/dashboard/reservations">
-            <FaCalendarAlt></FaCalendarAlt> Reservations
+          <NavLink to="/dashboard/enrolled-classes">
+            <FaCalendarAlt></FaCalendarAlt> Enrolled Classes
           </NavLink>
         </li>
         <li>
@@ -117,7 +100,6 @@ const Dashboard = () => {
     }
   };
 
-  console.log({isAdmin, isInstructor});
   return (
     <div className="drawer drawer-mobile ">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -133,17 +115,45 @@ const Dashboard = () => {
       <div className="drawer-side text-white font-semibold bg-[#014bcc]">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80">
-          {mainMenu}
+          {/* heading */}
+          <div className="my-4 p-4 text-center border rounded-xl">
+            {isAdmin && (
+              <h1 className="text-3xl font-bold text-stone-50">
+                {" "}
+                Admin Dashboard
+              </h1>
+            )}
+            {isInstructor && (
+              <h1 className="text-3xl font-bold text-stone-50">
+                {" "}
+                Instructor Dashboard
+              </h1>
+            )}
+            {isInstructor === isAdmin && (
+              <h1 className="text-3xl font-bold text-stone-50">
+                {" "}
+                Student Dashboard
+              </h1>
+            )}
+          </div>
+          <div className="text-xl">{mainMenu()}</div>
 
-          <div className="divider"></div>
-          <li>
-            <NavLink to="/">
-              <FaHome></FaHome> Home
-            </NavLink>{" "}
-          </li>
-          <li>
-            <NavLink to="/menu"> All Classes</NavLink>
-          </li>
+          <div className="divider  border-b border-white"></div>
+
+          <div className="text-xl">
+            {" "}
+            <li>
+              <NavLink to="/">
+                <FaHome></FaHome> Home
+              </NavLink>{" "}
+            </li>
+            <li>
+              <NavLink to="/menu"> All Classes</NavLink>
+            </li>
+            <li>
+              <button onClick={handleLogout}> Logout</button>
+            </li>
+          </div>
         </ul>
       </div>
     </div>
