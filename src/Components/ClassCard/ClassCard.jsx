@@ -2,8 +2,10 @@ import "./classCard.scss";
 import { Link, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
-const ClassCard = ({ product, handleDeleteFilter, userCheck }) => {
+const ClassCard = ({ product, userCheck }) => {
+  const [axiosSecure] = useAxiosSecure();
   const location = useLocation();
   const {
     _id,
@@ -19,24 +21,31 @@ const ClassCard = ({ product, handleDeleteFilter, userCheck }) => {
     feedback,
   } = product;
   const { user } = useAuth();
-  const handleDelete = (id) => {
-    fetch(`https://server-toy-marketplace.vercel.app/toys/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data) {
-          handleDeleteFilter(id);
 
-          Swal.fire({
-            title: "Delete",
-            text: "toys Delete Successfully",
-            showCancelButton: true,
-            icon: "delete",
-            confirmButtonText: "warning",
-          });
-        }
-      });
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will not be able to undo this action.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // User confirmed, perform the action
+        axiosSecure.delete(`/class/${id}`).then((data) => {
+          if (data?.data?.deletedCount === 1) {
+            Swal.fire({
+              title: "Deleted Successfully!",
+              icon: "success",
+              timer: 500, // Optional: Auto-close the modal after 2 seconds
+              showConfirmButton: false, // Optional: Hide the "OK" button
+            });
+          }
+        });
+      }
+    });
   };
   const pendingCheck = status == "pending";
   const declineCheck = status == "decline";

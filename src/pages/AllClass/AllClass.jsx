@@ -28,9 +28,6 @@ const AllClass = () => {
   }, []);
   console.log(classes);
 
-  const handleDeleteFilter = (id) => {
-    console.log(id);
-  };
 
   return (
     <div>
@@ -44,7 +41,6 @@ const AllClass = () => {
               <ClassCard
                 key={product._id}
                 product={product}
-                handleDeleteFilter={handleDeleteFilter}
                 userCheck={userCheck}
               />
             ))}
