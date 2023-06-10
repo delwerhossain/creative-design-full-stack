@@ -5,7 +5,6 @@ import useAuth from "../../hooks/useAuth";
 
 const ClassCard = ({ product, handleDeleteFilter }) => {
   const location = useLocation();
-  console.log(location.pathname);
   const {
     _id,
     name,
@@ -42,6 +41,8 @@ const ClassCard = ({ product, handleDeleteFilter }) => {
   const pendingCheck = status == "pending";
   const declineCheck = status == "decline";
   const acceptCheck = status == "accept";
+  const studentCheck = user?.role == "admin"
+  console.log(studentCheck);
   const locationCheck = location.pathname === "/dashboard/instructor-class";
   return (
     <div className="w-full sm:w-1/2 md:w-1/2 xl:w-2/4 p-4">
@@ -121,6 +122,13 @@ const ClassCard = ({ product, handleDeleteFilter }) => {
             </p>
           </div>
         )}
+        {/* {user?.role == "student"  && (
+          <div className="p-4 bg-purple-100 flex h-16 border-t items-center justify-between">
+            <button className="p-3 bg-blue-200 text-blue-800 font-bold rounded-xl">
+              Add to Card
+            </button>
+          </div>
+        )} */}
       </div>
     </div>
   );
