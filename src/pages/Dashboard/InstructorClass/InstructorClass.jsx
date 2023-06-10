@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ClassCard from "../../../Components/ClassCard/ClassCard";
 
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -7,11 +7,14 @@ const InstructorClass = () => {
   const [classes, setClasses] = useState([]);
   const [axiosSecure] = useAxiosSecure();
 
-    axiosSecure.get(`/instructor-class`)
-        .then(data => { 
-            console.log(data);
-            setClasses(data);
-        })
+  useEffect(() => {
+    
+    axiosSecure.get(`/instructor-class`).then((data) => {
+      setClasses(data.data);
+    });
+  }, [])
+  
+  console.log(classes);
     // const FilterByMail =[]
     //     cateID.filter(
     //    (toys) => user.email === toys.sellerEmail
@@ -24,6 +27,7 @@ const InstructorClass = () => {
     //     const deleteFilter = myToysFilter.filter((data) => data._id !== id);
     //     setMyToysFilter(deleteFilter);
     //   }; 
+    
     const handleDeleteFilter = (id) => {
         console.log(id);
      }
@@ -34,7 +38,7 @@ const InstructorClass = () => {
             My Class{" "}
           </h1>
           <div className="container mx-auto">
-            {/* <div className="flex flex-wrap -mx-4">
+            <div className="flex flex-wrap -mx-4">
               {classes.map((product) => (
                 <ClassCard
                   key={product._id}
@@ -42,7 +46,7 @@ const InstructorClass = () => {
                   handleDeleteFilter={handleDeleteFilter}
                 ></ClassCard>
               ))}
-            </div> */}
+            </div>
           </div>
         </body>
       </div>
