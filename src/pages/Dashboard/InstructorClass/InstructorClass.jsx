@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import ClassCard from "../../../Components/ClassCard/ClassCard";
-
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const InstructorClass = () => {
@@ -14,7 +13,6 @@ const InstructorClass = () => {
     });
   }, [])
   
-  console.log(classes);
     // const FilterByMail =[]
     //     cateID.filter(
     //    (toys) => user.email === toys.sellerEmail

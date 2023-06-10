@@ -1,10 +1,11 @@
-import Rating from "react-rating";
 import "./classCard.scss";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 
 const ClassCard = ({ product, handleDeleteFilter }) => {
+  const location = useLocation();
+  console.log(location.pathname);
   const {
     _id,
     name,
@@ -41,6 +42,7 @@ const ClassCard = ({ product, handleDeleteFilter }) => {
   const pendingCheck = status == "pending";
   const declineCheck = status == "decline";
   const acceptCheck = status == "accept";
+  const locationCheck = location.pathname === "/dashboard/instructor-class";
   return (
     <div className="w-full sm:w-1/2 md:w-1/2 xl:w-2/4 p-4">
       <div className="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
@@ -83,7 +85,7 @@ const ClassCard = ({ product, handleDeleteFilter }) => {
           </span>
         </div>
         {/* extra secure layer */}
-        {user && user.email === instructorEmail && (
+        {user && user.email === instructorEmail && locationCheck && (
           <div className="p-4 flex  items-center justify-between">
             <span
               className={`inline-block px-2 mr-2 py-3 rounded-full font-semibold  tracking-wide  ${
