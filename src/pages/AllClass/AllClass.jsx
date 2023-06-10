@@ -1,15 +1,25 @@
 import { useEffect, useState } from "react";
 import ClassCard from "../../Components/ClassCard/ClassCard";
+import useAuth from "../../hooks/useAuth";
 
 const AllClass = () => {
   const [classes, setClasses] = useState([]);
-
+  const [userCheck, setUserCheck] = useState([]);
+  const { user } = useAuth();
   useEffect(() => {
     try {
       const fetchData = async () => {
-        const res = await fetch("http://localhost:5000/all-class");
+        const res = await fetch("http://localhost:5000/all-class", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({mail: user?.email}),
+        });
         const data = await res.json();
-        setClasses(data);
+        setClasses(data.result);
+        setUserCheck(data.userCheck);
       };
       fetchData();
     } catch (error) {
@@ -35,6 +45,7 @@ const AllClass = () => {
                 key={product._id}
                 product={product}
                 handleDeleteFilter={handleDeleteFilter}
+                userCheck={userCheck}
               />
             ))}
           </div>

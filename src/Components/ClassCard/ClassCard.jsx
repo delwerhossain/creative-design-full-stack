@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 
-const ClassCard = ({ product, handleDeleteFilter }) => {
+const ClassCard = ({ product, handleDeleteFilter, userCheck }) => {
   const location = useLocation();
   const {
     _id,
@@ -41,7 +41,7 @@ const ClassCard = ({ product, handleDeleteFilter }) => {
   const pendingCheck = status == "pending";
   const declineCheck = status == "decline";
   const acceptCheck = status == "accept";
-  const studentCheck = user?.role == "admin"
+  const studentCheck = user?.role == "admin";
   console.log(studentCheck);
   const locationCheck = location.pathname === "/dashboard/instructor-class";
   return (
@@ -122,13 +122,13 @@ const ClassCard = ({ product, handleDeleteFilter }) => {
             </p>
           </div>
         )}
-        {/* {user?.role == "student"  && (
+        {userCheck && (
           <div className="p-4 bg-purple-100 flex h-16 border-t items-center justify-between">
             <button className="p-3 bg-blue-200 text-blue-800 font-bold rounded-xl">
               Add to Card
             </button>
           </div>
-        )} */}
+        )}
       </div>
     </div>
   );

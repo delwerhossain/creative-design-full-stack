@@ -13,19 +13,7 @@ const InstructorClass = () => {
     });
   }, [])
   
-    // const FilterByMail =[]
-    //     cateID.filter(
-    //    (toys) => user.email === toys.sellerEmail
-    //  );
-  
-
-    // const myClassFilter = [3, 3]
-    //   const [myToysFilter, setMyToysFilter] = useState(FilterByMail); 
-    //   const handleDeleteFilter = (id) => {
-    //     const deleteFilter = myToysFilter.filter((data) => data._id !== id);
-    //     setMyToysFilter(deleteFilter);
-    //   }; 
-    
+   
     const handleDeleteFilter = (id) => {
         console.log(id);
      }
