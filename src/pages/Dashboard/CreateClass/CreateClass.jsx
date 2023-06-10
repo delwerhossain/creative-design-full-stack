@@ -39,8 +39,7 @@ const CreateClass = () => {
         document.getElementById("myform").reset();
         Swal.fire({
           title: "success",
-          text: "class Added Successfully",
-          showDenyButton: true,
+          text: "class Added Successfully",          
           showCancelButton: true,
           icon: "success",
           confirmButtonText: "Cool",
