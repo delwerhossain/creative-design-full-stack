@@ -26,7 +26,6 @@ const AllClass = () => {
       console.log(error);
     }
   }, []);
-  console.log(classes);
 
 
   return (
