@@ -2,10 +2,32 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../provider/AuthProvider";
 import { Link } from "react-router-dom";
 import { FiLogIn, FiLogOut } from "react-icons/fi";
+import axios from "axios";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
 
+  // user role chcek
+  const [userCheck, setUserCheck] = useState("");
+
+  const userRole = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/check-user-role",
+        {
+          email: user?.email,
+        }
+      );
+      setUserCheck(response.data.role);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    userRole();
+  }, [user]);
+
+  // dakr mode theme settings
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
   );
@@ -19,7 +41,7 @@ const Navbar = () => {
     }
   };
 
-  // set theme state in localstorage on mount & also update localstorage on state change
+  // set theme state in localStorage on mount & also update localStorage on state change
   useEffect(() => {
     localStorage.setItem("theme", theme);
     const localTheme = localStorage.getItem("theme");
@@ -27,6 +49,7 @@ const Navbar = () => {
     document.querySelector("html").setAttribute("data-theme", localTheme);
   }, [theme]);
 
+  // logout user part
   const handleSignOut = () => {
     return logOut()
       .then(() => {
@@ -78,13 +101,44 @@ const Navbar = () => {
             <span className="badge badge-sm badge-warning">NEW</span>
           </Link>
         </li>
-        {user && (
+        {/* select-classes for student */}
+        {userCheck === "student" && (
           <li>
-            <Link to={"/dashboard/"}>
+            <Link to={"/dashboard/select-classes"}>
+              Selected Classes
+              <span className="badge badge-xs badge-info"></span>
+            </Link>
+          </li>
+        )}
+
+        {/* dashboard for student */}
+        {userCheck === "student" ? (
+          <li>
+            <Link to={"/dashboard/select-classes"}>
               Dashboard
               <span className="badge badge-xs badge-info"></span>
             </Link>
           </li>
+        ) : userCheck === "instructor" ? (
+          <>
+            <li>
+              <Link to={"/dashboard/instructor-class"}>
+                Dashboard
+                <span className="badge badge-xs badge-info"></span>
+              </Link>
+            </li>
+          </>
+        ) : (
+          userCheck === "admin" && (
+            <>
+              <li>
+                <Link to={"/dashboard/manage-class"}>
+                  Dashboard
+                  <span className="badge badge-xs badge-info"></span>
+                </Link>
+              </li>
+            </>
+          )
         )}
       </ul>
     </>
@@ -124,7 +178,6 @@ const Navbar = () => {
             src="https://shorturl.at/dhH27"
             alt=""
           />
-        
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">{menuList}</div>
