@@ -14,8 +14,6 @@ const ClassCard = ({ product, userRole }) => {
   const [axiosSecure] = useAxiosSecure();
   const [userCheck] = useRole();
 
-  console.log(userCheck);
-
   const {
     _id,
     name,

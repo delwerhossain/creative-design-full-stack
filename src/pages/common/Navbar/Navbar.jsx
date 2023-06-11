@@ -4,6 +4,7 @@ import { FiLogIn, FiLogOut } from "react-icons/fi";
 import useAuth from "../../../hooks/useAuth";
 import useCart from "../../../hooks/useCart";
 import useRole from "../../../hooks/useRole";
+import {FaChalkboardTeacher} from "react-icons/fa";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -101,6 +102,12 @@ const Navbar = () => {
             </svg>
             All-Classes
             <span className="badge badge-sm badge-warning">NEW</span>
+          </Link>
+        </li>
+        <li>
+          <Link to={"/all-instructor"}>
+      <FaChalkboardTeacher/>
+            All-instructor
           </Link>
         </li>
         {/* select-classes for student */}
