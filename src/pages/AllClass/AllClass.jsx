@@ -34,7 +34,7 @@ const AllClass = () => {
    if (loading) {
      setTimeout(() => {
        setLoading(false);
-     }, 300);
+     }, 500);
    }
  }, []);
 
@@ -45,7 +45,7 @@ const AllClass = () => {
  ) : (
    <div>
      <h1 className="mb-12 text-4xl font-extrabold leading-none tracking-tight text-gray-900 text-center md:text-5xl lg:text-6xl">
-       My Class
+       All Class
      </h1>
      <div className="container mx-auto">
        <div className="flex flex-wrap -mx-4">
