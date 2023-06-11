@@ -32,7 +32,7 @@ const AllUsers = () => {
               <th>Image</th>
               <th>Name</th>
               <th>Email</th>
-              <th>status</th>
+              <th>Role</th>
             </tr>
           </thead>
           <tbody>
