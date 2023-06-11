@@ -57,25 +57,7 @@ const Login = () => {
         setSuccess("");
       });
   };
-  const handleGitPopup = () => {
-    return gitSignIn()
-      .then((result) => {
-        setError("");
-        setSuccess("login success - Google");
-        userInsert(
-          result.user.displayName,
-          result.user.email,
-          result.user.photoURL
-        );
-        navigate(from, { replace: true });
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorMessage = error.message;
-        setError(errorMessage);
-        setSuccess("");
-      });
-  };
+
 
   const [loading, setLoading] = useState(true);
 

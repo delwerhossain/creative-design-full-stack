@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import ProfileCard from "../../Components/ProfileCard/ProfileCard";
+import Loading from "../../Components/Loading/Loading";
 
 const AllInstructor = () => {
   const [axiosSecure] = useAxiosSecure();
@@ -13,7 +14,21 @@ const AllInstructor = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  return (
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (loading) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 300);
+    }
+  }, []);
+
+  return loading ? (
+    <div className="grid justify-center items-center">
+      <Loading></Loading>
+    </div>
+  ) : (
     <div>
       <h1 className="text-4xl font-semibold text-center  mt-10 underline">
         Our InsTructor
