@@ -4,13 +4,17 @@ import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useCart from "../../hooks/useCart";
+import useRole from "../../hooks/useRole";
 
-const ClassCard = ({ product, userCheck }) => {
+const ClassCard = ({ product, userRole }) => {
   const { user } = useAuth();
   const [, refetch] = useCart();
   const navigate = useNavigate();
   const location = useLocation();
   const [axiosSecure] = useAxiosSecure();
+  const [userCheck] = useRole();
+
+  console.log(userCheck);
 
   const {
     _id,
@@ -26,9 +30,9 @@ const ClassCard = ({ product, userCheck }) => {
     feedback,
   } = product;
 
-  const handleAddToCart = (item) => {
+  const handleAddToCart = (item, userRole) => {
     console.log(item);
-    if (userCheck) {
+    if (userRole) {
       const cartItem = {
         classId: _id,
         name,
@@ -67,9 +71,9 @@ const ClassCard = ({ product, userCheck }) => {
   };
 
   // delete class - instructor
-  const handleDelete = (id, userCheck) => {
+  const handleDelete = (id, userRole) => {
     // extra security layer for deleting
-    if (userCheck) {
+    if (userRole) {
       return alert("you have no permission to delete");
     }
     Swal.fire({
@@ -102,6 +106,7 @@ const ClassCard = ({ product, userCheck }) => {
   const declineCheck = status == "decline";
   const acceptCheck = status == "accept";
   const locationCheck = location.pathname === "/dashboard/instructor-class";
+
   ////////////////////////
   return (
     <div className="w-full sm:w-1/2 md:w-1/2 xl:w-2/4 p-4">
@@ -167,7 +172,7 @@ const ClassCard = ({ product, userCheck }) => {
                 Update{" "}
               </Link>
               <button
-                onClick={() => handleDelete(_id, userCheck)}
+                onClick={() => handleDelete(_id, userRole)}
                 className="btn btn-error"
               >
                 Delete
@@ -185,15 +190,17 @@ const ClassCard = ({ product, userCheck }) => {
           </div>
         )}
 
-        {userCheck && (
+        {userCheck === "student" || userCheck === null ? (
           <div className="p-4 bg-purple-100 flex h-16 border-t items-center justify-between">
             <button
-              onClick={() => handleAddToCart(_id)}
+              onClick={() => handleAddToCart(_id, userRole)}
               className="p-3 bg-blue-200 text-blue-800 font-bold rounded-xl"
             >
               Add to Card
             </button>
           </div>
+        ) : (
+          <></>
         )}
       </div>
     </div>

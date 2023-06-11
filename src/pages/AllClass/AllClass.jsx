@@ -4,7 +4,7 @@ import useAuth from "../../hooks/useAuth";
 
 const AllClass = () => {
   const [classes, setClasses] = useState([]);
-  const [userCheck, setUserCheck] = useState([]);
+  const [userRole, setUserCheck] = useState([]);
   const { user } = useAuth();
   useEffect(() => {
     try {
@@ -18,8 +18,8 @@ const AllClass = () => {
           body: JSON.stringify({ mail: user?.email }),
         });
         const data = await res.json();
-        setClasses(data.result);
-        setUserCheck(data.userCheck);
+        setClasses(data?.result);
+        setUserCheck(data?.userCheck);
       };
       fetchData();
     } catch (error) {
@@ -38,7 +38,7 @@ const AllClass = () => {
             <ClassCard
               key={product._id}
               product={product}
-              userCheck={userCheck}
+              userRole={userRole}
             />
           ))}
         </div>
