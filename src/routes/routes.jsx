@@ -8,7 +8,7 @@ import PrivateRoute from "./PrivateRoute";
 import AllClass from "../pages/AllClass/AllClass";
 import SelectClass from "../pages/Dashboard/SelectClass/SelectClass";
 import Dashboard from "../Layout/Dashboard/Dashboard";
-import Payment from "../pages/Dashboard/Payment/Payment ";
+// import Payment from "../pages/Dashboard/Payment/Payment ";
 import AdminRoute from "./AdminRoute";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import ManageClass from "../pages/Dashboard/ManageClass/ManageClass";
@@ -59,14 +59,14 @@ export const router = createBrowserRouter([
         path: "enrolled-classes",
         element: <EnrolledClass />,
       },
-      {
-        path: "payment",
-        element: <Payment />,
-      },
-      {
-        path: "payment-history",
-        element: <Payment />,
-      },
+      // {
+      //   path: "payment",
+      //   element: <Payment />,
+      // },
+      // {
+      //   path: "payment-history",
+      //   element: <Payment />,
+      // },
       // instructor
       {
         path: "instructor-class",

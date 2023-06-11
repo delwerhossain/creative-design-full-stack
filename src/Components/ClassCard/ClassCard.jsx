@@ -10,23 +10,21 @@ const ClassCard = ({ product, userCheck }) => {
   const [, refetch] = useCart();
   const navigate = useNavigate();
   const location = useLocation();
-  const [axiosSecure] = useAxiosSecure()
+  const [axiosSecure] = useAxiosSecure();
 
-
-
-    const {
-      _id,
-      name,
-      pictureURL,
-      instructorName,
-      instructorEmail,
-      subCategory,
-      price,
-      availableQuantity,
-      enrolled,
-      status,
-      feedback,
-    } = product;
+  const {
+    _id,
+    name,
+    pictureURL,
+    instructorName,
+    instructorEmail,
+    subCategory,
+    price,
+    availableQuantity,
+    enrolled,
+    status,
+    feedback,
+  } = product;
 
   const handleAddToCart = (item) => {
     console.log(item);
@@ -38,7 +36,8 @@ const ClassCard = ({ product, userCheck }) => {
         price,
         email: user.email,
       };
-      axiosSecure.post("http://localhost:5000/carts", {cartItem})
+      axiosSecure
+        .post("http://localhost:5000/carts", { cartItem })
         .then((data) => {
           if (data.data.insertedId) {
             refetch(); // refetch cart to update the number of items in the cart
@@ -67,12 +66,11 @@ const ClassCard = ({ product, userCheck }) => {
     }
   };
 
-
-// delete class - instructor 
+  // delete class - instructor
   const handleDelete = (id, userCheck) => {
     // extra security layer for deleting
     if (userCheck) {
-      return alert('you have no permission to delete')
+      return alert("you have no permission to delete");
     }
     Swal.fire({
       title: "Are you sure?",
@@ -98,7 +96,6 @@ const ClassCard = ({ product, userCheck }) => {
       }
     });
   };
-
 
   // conditional rendering for card actions
   const pendingCheck = status == "pending";
@@ -187,6 +184,7 @@ const ClassCard = ({ product, userCheck }) => {
             </p>
           </div>
         )}
+
         {userCheck && (
           <div className="p-4 bg-purple-100 flex h-16 border-t items-center justify-between">
             <button

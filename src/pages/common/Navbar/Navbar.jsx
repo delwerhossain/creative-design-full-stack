@@ -1,11 +1,14 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../../provider/AuthProvider";
+import {  useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FiLogIn, FiLogOut } from "react-icons/fi";
 import axios from "axios";
+import useAuth from "../../../hooks/useAuth";
+import useCart from "../../../hooks/useCart";
 
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut } = useAuth();
+  const [cart] = useCart()
+
 
   // user role chcek
   const [userCheck, setUserCheck] = useState("");
@@ -105,7 +108,7 @@ const Navbar = () => {
           <li>
             <Link to={"/dashboard/select-classes"}>
               Selected Classes
-              <span className="badge badge-sm">0+</span>
+              <span className="badge badge-sm">{cart ? cart.length : 0}+</span>
             </Link>
           </li>
         )}
