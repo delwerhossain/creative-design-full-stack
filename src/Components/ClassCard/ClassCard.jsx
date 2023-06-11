@@ -44,12 +44,21 @@ const ClassCard = ({ product, userRole }) => {
           if (data.data.insertedId) {
             refetch(); // refetch cart to update the number of items in the cart
             Swal.fire({
-              position: "top-end",
+              position: "top-center",
               icon: "success",
-              title: "Food added on the cart.",
+              title: "Class added on the cart.",
               showConfirmButton: false,
-              timer: 1500,
+              timer: 500,
             });
+          }
+          else if (data.data === "already added") {
+               Swal.fire({
+                 position: "top-center",
+                 icon: "warning",
+                 title: "Class already added",
+                 showConfirmButton: false,
+                 timer: 1000,
+               });
           }
         });
     } else {

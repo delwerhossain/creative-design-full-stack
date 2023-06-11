@@ -18,7 +18,7 @@ export const userInsert = (name, email, img) => {
           icon: "success",
           title: "User created successfully.",
           showConfirmButton: false,
-          timer: 1000,
+          timer: 500,
         });
       } else if (data.message == "user already exists") {
         //  reset();
@@ -27,7 +27,7 @@ export const userInsert = (name, email, img) => {
           icon: "success",
           title: "Welcome back.",
           showConfirmButton: false,
-          timer: 1500,
+          timer: 500,
         });
       }
     });

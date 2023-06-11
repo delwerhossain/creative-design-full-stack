@@ -65,7 +65,7 @@ console.log(cart);
                  </div>
                </td>
                <td>{item.name}</td>
-               <td>${item.instructorEmail}</td>
+               <td>{item.instructorEmail}</td>
                <td>
                  {item.status && (
                    <>
