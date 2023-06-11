@@ -1,5 +1,5 @@
 import { RiArrowDropDownLine } from "react-icons/ri";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useEffect, useState } from "react";

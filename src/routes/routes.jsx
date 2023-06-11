@@ -17,6 +17,7 @@ import CreateClass from "../pages/Dashboard/CreateClass/CreateClass";
 import EnrolledClass from "../pages/Dashboard/EnrolledClass/EnrolledClass";
 import InstructorRoute from "./InstructorRoute";
 import ClassEdit from "../pages/Dashboard/ClassEdit/ClassEdit";
+import AllInstructor from "../pages/AllInstructor/AllInstructor";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: "all-classes",
         element: <AllClass />,
+      },
+      {
+        path: "all-instructor",
+        element: <AllInstructor />,
       },
       {
         path: "login",
