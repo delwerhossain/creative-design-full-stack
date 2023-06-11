@@ -15,6 +15,8 @@ import ManageClass from "../pages/Dashboard/ManageClass/ManageClass";
 import InstructorClass from "../pages/Dashboard/InstructorClass/InstructorClass";
 import CreateClass from "../pages/Dashboard/CreateClass/CreateClass";
 import EnrolledClass from "../pages/Dashboard/EnrolledClass/EnrolledClass";
+import InstructorRoute from "./InsructorRoute";
+import ClassEdit from "../pages/Dashboard/ClassEdit/ClassEdit";
 
 export const router = createBrowserRouter([
   {
@@ -48,7 +50,7 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     errorElement: <ErrorPage />,
-    children: [    
+    children: [
       {
         path: "select-classes",
         element: <SelectClass />,
@@ -68,11 +70,28 @@ export const router = createBrowserRouter([
       // instructor
       {
         path: "instructor-class",
-        element: <InstructorClass />,
+        element: (
+          <InstructorRoute>
+            {" "}
+            <InstructorClass />
+          </InstructorRoute>
+        ),
+      },
+      {
+        path: "class-edit/:paramID",
+        element: (
+          <InstructorRoute>
+            <ClassEdit />
+          </InstructorRoute>
+        ),
       },
       {
         path: "create-class",
-        element: <CreateClass />,
+        element: (
+          <InstructorRoute>
+            <CreateClass />
+          </InstructorRoute>
+        ),
       },
       // admin routes
       {

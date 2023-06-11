@@ -3,12 +3,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import useCart from "../../hooks/useCart";
 
 const ClassCard = ({ product, userCheck }) => {
   const { user } = useAuth();
-  const [, refetch] = useCart();
-  const navigate = useNavigate();
+  // const [, refetch] = useCart();
+  // const navigate = useNavigate();
   const location = useLocation();
   const [axiosSecure] = useAxiosSecure()
 
@@ -28,7 +27,7 @@ const ClassCard = ({ product, userCheck }) => {
       feedback,
     } = product;
 
-  // const handleAddToCart = (item) => {
+  const handleAddToCart = (item) => {
   //   console.log(item);
   //   if (user && user.email) {
   //     const cartItem = {
@@ -72,7 +71,7 @@ const ClassCard = ({ product, userCheck }) => {
   //       }
   //     });
   //   }
-  // };
+  };
 
 
 // delete class - instructor 
@@ -94,7 +93,7 @@ const ClassCard = ({ product, userCheck }) => {
               title: "Deleted Successfully!",
               icon: "success",
               timer: 500, // Optional: Auto-close the modal after 2 seconds
-              showConfirmButton: false, // Optional: Hide the "OK" button
+              showConfirmButton: false,
             });
           }
         });
@@ -166,7 +165,10 @@ const ClassCard = ({ product, userCheck }) => {
             </span>
             <div>
               {" "}
-              <Link to={`/edit/${_id}`} className="btn btn-secondary mr-4">
+              <Link
+                to={`/dashboard/class-edit/${_id}`}
+                className="btn btn-secondary mr-4"
+              >
                 Update{" "}
               </Link>
               <button
@@ -190,7 +192,7 @@ const ClassCard = ({ product, userCheck }) => {
         {userCheck && (
           <div className="p-4 bg-purple-100 flex h-16 border-t items-center justify-between">
             <button
-              onClick={()=>handleAddToCart(_id)}
+              onClick={() => handleAddToCart(_id)}
               className="p-3 bg-blue-200 text-blue-800 font-bold rounded-xl"
             >
               Add to Card
