@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import useCart from "../../../hooks/useCart";
 import Loading from "../../../Components/Loading/Loading";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const SelectClass = () => {
   const [cart, refetch] = useCart();
@@ -64,8 +64,8 @@ const SelectClass = () => {
          <thead>
            <tr>
              <th>#</th>
-             <th>Food</th>
-             <th>Item Name</th>
+             <th>Image</th>
+             <th>Class Name</th>
              <th>Price</th>
              <th>Action</th>
            </tr>
@@ -85,7 +85,7 @@ const SelectClass = () => {
                  </div>
                </td>
                <td>{item.name}</td>
-               <td className="text-end">${item.price}</td>
+               <td className="">${item.price}</td>
                <td>
                  <button
                    onClick={() => handleDelete(item)}
