@@ -1,34 +1,34 @@
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FiLogIn, FiLogOut } from "react-icons/fi";
-import axios from "axios";
 import useAuth from "../../../hooks/useAuth";
 import useCart from "../../../hooks/useCart";
+import useRole from "../../../hooks/useRole";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
-  const [cart] = useCart()
+  const [cart] = useCart();
+  const [userCheck] = useRole();
+ 
+  // // user role chcek
+  // const [userCheck, setUserCheck] = useState("");
 
-
-  // user role chcek
-  const [userCheck, setUserCheck] = useState("");
-
-  const userRole = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/check-user-role",
-        {
-          email: user?.email,
-        }
-      );
-      setUserCheck(response.data.role);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  useEffect(() => {
-    userRole();
-  }, [user]);
+  // const userRole = async () => {
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:5000/check-user-role",
+  //       {
+  //         email: user?.email,
+  //       }
+  //     );
+  //     setUserCheck(response.data.role);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   userRole();
+  // }, [user]);
 
   // dakr mode theme settings
   const [theme, setTheme] = useState(
