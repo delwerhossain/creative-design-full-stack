@@ -5,6 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useCart from "../../hooks/useCart";
 import useRole from "../../hooks/useRole";
+import { useState } from "react";
 
 const ClassCard = ({ product, userRole }) => {
   const { user } = useAuth();
@@ -13,6 +14,7 @@ const ClassCard = ({ product, userRole }) => {
   const location = useLocation();
   const [axiosSecure] = useAxiosSecure();
   const [userCheck] = useRole();
+  const [added, setAdded] = useState([]);
 
   const {
     _id,
@@ -50,15 +52,14 @@ const ClassCard = ({ product, userRole }) => {
               showConfirmButton: false,
               timer: 500,
             });
-          }
-          else if (data.data === "already added") {
-               Swal.fire({
-                 position: "top-center",
-                 icon: "warning",
-                 title: "Class already added",
-                 showConfirmButton: false,
-                 timer: 1000,
-               });
+          } else if (data.data === "already added") {
+            Swal.fire({
+              position: "top-center",
+              icon: "warning",
+              title: "Class already added",
+              showConfirmButton: false,
+              timer: 1000,
+            });
           }
         });
     } else {
@@ -108,6 +109,13 @@ const ClassCard = ({ product, userRole }) => {
     });
   };
 
+  const addedCartCheck = (id) => {
+    axiosSecure.get(`/addedCartCheck/${id}`).then((data) => {
+      setAdded(data.data);
+    });
+  };
+
+  addedCartCheck(_id);
   // conditional rendering for card actions
   const pendingCheck = status == "pending";
   const declineCheck = status == "decline";
@@ -201,9 +209,11 @@ const ClassCard = ({ product, userRole }) => {
           <div className="p-4 bg-purple-100 flex h-16 border-t items-center justify-between">
             <button
               onClick={() => handleAddToCart(_id, userRole)}
-              className="p-3 bg-blue-200 text-blue-800 font-bold rounded-xl"
+              className={`p-3  font-bold rounded-xl ${
+                added ? "bg-blue-200 text-blue-800" : "bg-green-700 text-white"
+              }`}
             >
-              Add to Card
+              {added ? "Add to Card" : "Added"}
             </button>
           </div>
         ) : (
