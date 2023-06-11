@@ -12,7 +12,6 @@ const useRole = () => {
         const res = await axiosSecure.post(`/check-user-role`, {
           email: user?.email
         });
-        console.log(res?.data);
       return res?.data?.role;
     },
   });
