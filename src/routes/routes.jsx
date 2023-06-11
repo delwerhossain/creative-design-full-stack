@@ -15,7 +15,7 @@ import ManageClass from "../pages/Dashboard/ManageClass/ManageClass";
 import InstructorClass from "../pages/Dashboard/InstructorClass/InstructorClass";
 import CreateClass from "../pages/Dashboard/CreateClass/CreateClass";
 import EnrolledClass from "../pages/Dashboard/EnrolledClass/EnrolledClass";
-import InstructorRoute from "./InsructorRoute";
+import InstructorRoute from "./InstructorRoute";
 import ClassEdit from "../pages/Dashboard/ClassEdit/ClassEdit";
 
 export const router = createBrowserRouter([
