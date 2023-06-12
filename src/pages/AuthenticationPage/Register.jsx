@@ -108,7 +108,7 @@ const Register = () => {
             alt=""
           />
         </div>
-        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+        <div className="card flex-shrink-0 w-full  max-w-sm shadow-2xl bg-base-100">
           <div className="card-body text-primary">
             <h1 className="text-3xl text-center font-bold">Sign Up</h1>
             <form id="form" onSubmit={handleRegister} className="card-body">
@@ -120,7 +120,7 @@ const Register = () => {
                   type="name"
                   placeholder="name"
                   name="name"
-                  className="input-bordered input"
+                  className="  bg-sky-50 input-bordered input"
                   required
                 />
               </div>
@@ -132,7 +132,7 @@ const Register = () => {
                   type="name"
                   placeholder="Photo Url"
                   name="pic"
-                  className="input-bordered input"
+                  className="input-bordered bg-sky-50 input"
                   required
                 />
               </div>
@@ -156,7 +156,7 @@ const Register = () => {
                   type={show ? "text" : "password"}
                   name="password"
                   placeholder="password"
-                  className="input-bordered input"
+                  className="input-bordered bg-sky-50 input"
                   required
                 />
                 <label className="label">
@@ -166,7 +166,7 @@ const Register = () => {
                   type={show ? "text" : "password"}
                   name="confirm"
                   placeholder="confirm password"
-                  className="input-bordered input"
+                  className="input-bordered  bg-sky-50 input"
                   required
                 />
                 <p onClick={() => setShow(!show)} className=" mt-2 underline">
@@ -188,7 +188,7 @@ const Register = () => {
                   <input
                     type="checkbox"
                     onClick={() => setAccept(!accept)}
-                    className="checkbox checkbox-secondary"
+                    className=" bg-sky-50 checkbox checkbox-secondary"
                   />
                 </label>
               </div>

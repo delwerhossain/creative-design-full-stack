@@ -77,7 +77,7 @@ const Login = () => {
       <Loading></Loading>
     </div>
   ) : (
-    <div className="hero min-h-screen bg-white">
+    <div className="hero min-h-screen bg-white ">
       <div className="hero-content flex-col lg:flex-row">
         <div className="w-1/2 mr-12">
           <img
@@ -86,7 +86,7 @@ const Login = () => {
             alt=""
           />
         </div>
-        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+        <div className="card flex-shrink-0 w-full  max-w-sm shadow-2xl bg-base-100">
           <div className="card-body text-primary">
             <h1 className="text-3xl text-center font-bold">Login</h1>
             <form onSubmit={handleSubmit(handleLogin)}>
@@ -95,7 +95,7 @@ const Login = () => {
                 type="email"
                 name="email"
                 placeholder="email"
-                className={`input input-bordered mb-4 w-full${
+                className={`input bg-sky-50 input-bordered mb-4 w-full${
                   errors.email ? "input-error" : ""
                 }`}
                 {...register("email", { required: "Email is required" })}
@@ -109,7 +109,7 @@ const Login = () => {
                 type="password"
                 name="password"
                 placeholder="password"
-                className={`input input-bordered mb-4 w-full ${
+                className={`input  bg-sky-50 input-bordered mb-4 w-full ${
                   errors.password ? "input-error" : ""
                 }`}
                 {...register("password", { required: "Password is required" })}
