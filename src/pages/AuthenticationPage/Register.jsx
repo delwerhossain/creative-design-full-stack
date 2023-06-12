@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Loading from "../../Components/Loading/Loading";
 import { updateProfile } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
@@ -8,7 +8,7 @@ import { userInsert } from "./commonAuth";
 import useAuth from "../../hooks/useAuth";
 
 const Register = () => {
-  const { createUser, gitSignIn, googleSignIn } = useAuth();
+  const { createUser, googleSignIn } = useAuth();
   // state
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -31,6 +31,19 @@ const Register = () => {
     if (password !== confirm) {
       setError("confirm password not correct");
       return;
+    } else if (password.length < 6) {
+      setError("Password should be at least 6 characters long.");
+      return;
+    } else if (!/[A-Z]/.test(password)) {
+      setError("Password should contain at least one capital letter.");
+      return;
+    } else if (!/[!@#$%^&*]/.test(password)) {
+      setError("Password should contain at least one special character.");
+      return;
+    } else {
+      // Password is valid, proceed with registration
+      setError("");
+      // Perform registration logic here
     }
 
     createUser(email, password)
@@ -62,24 +75,6 @@ const Register = () => {
           result.user.photoURL
         );
         setSuccess("successfully registered with Google");
-        navigate(from, { replace: true });
-      })
-      .catch((error) => {
-        console.error(error);
-        setError(error.code);
-        setSuccess("");
-      });
-  };
-  const handleGitPopup = () => {
-    gitSignIn()
-      .then((result) => {
-        userInsert(
-          result.user.displayName,
-          result.user.email,
-          result.user.photoURL
-        );
-        setError("");
-        setSuccess("successfully registered with Git ");
         navigate(from, { replace: true });
       })
       .catch((error) => {
@@ -193,10 +188,8 @@ const Register = () => {
                   <input
                     type="checkbox"
                     onClick={() => setAccept(!accept)}
-                    
                     className="checkbox checkbox-secondary"
                   />
-              
                 </label>
               </div>
               <div className="form-control mt-6">
