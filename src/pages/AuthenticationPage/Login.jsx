@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 
 const Login = () => {
   // context api
-  const { signIn, googleSignIn, gitSignIn } = useAuth();
+  const { signIn, googleSignIn } = useAuth();
   //form
   const {
     register,
