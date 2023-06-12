@@ -14,6 +14,7 @@ const AllInstructor = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -34,7 +35,7 @@ const AllInstructor = () => {
         Our InsTructor
       </h1>
 
-      <div className="mt-6 grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
+      <div className="mt-6 grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 ">
         {instructors.map((instructor) => (
           <ProfileCard
             key={instructor._id}

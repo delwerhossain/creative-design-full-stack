@@ -1,13 +1,13 @@
-import "./classCard.scss";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import "./../ClassCard/classCard.scss";
+import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useCart from "../../hooks/useCart";
 import useRole from "../../hooks/useRole";
-import {  useState } from "react";
+import { useState } from "react";
 
-const ClassCard = ({ product, userRole }) => {
+const AllClassCard = ({ product, userRole }) => {
   const { user } = useAuth();
   const [, refetch] = useCart();
   const navigate = useNavigate();
@@ -26,8 +26,6 @@ const ClassCard = ({ product, userRole }) => {
     price,
     availableQuantity,
     enrolled,
-    status,
-    feedback,
   } = product;
 
   const handleAddToCart = (item, userRole) => {
@@ -78,51 +76,13 @@ const ClassCard = ({ product, userRole }) => {
     }
   };
 
-  // delete class - instructor
-  const handleDelete = (id, userRole) => {
-    // extra security layer for deleting
-    if (userRole) {
-      return alert("you have no permission to delete");
-    }
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You will not be able to undo this action.",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // User confirmed, perform the action
-        axiosSecure.delete(`/class/${id}`).then((data) => {
-          if (data?.data?.deletedCount === 1) {
-            Swal.fire({
-              title: "Deleted Successfully!",
-              icon: "success",
-              timer: 500, // Optional: Auto-close the modal after 2 seconds
-              showConfirmButton: false,
-            });
-          }
-        });
-      }
+  const addedCartCheck = (id) => {
+    axiosSecure.get(`/addedCartCheck/${id}?email=${user.email}`).then((data) => {
+      setAdded(data.data);
     });
   };
 
-  const addedCartCheck = (id) => {
-    axiosSecure
-      .get(`/addedCartCheck/${id}?email=${user?.email}`)
-      .then((data) => {
-        setAdded(data.data);
-      });
-  };
-  
-  addedCartCheck(_id);
-  // conditional rendering for card actions
-  const pendingCheck = status == "pending";
-  const declineCheck = status == "decline";
-  const acceptCheck = status == "accept";
-  const locationCheck = location.pathname === "/dashboard/instructor-class";
+  addedCartCheck();
 
   ////////////////////////
   return (
@@ -166,46 +126,6 @@ const ClassCard = ({ product, userRole }) => {
             {instructorEmail}
           </span>
         </div>
-        {/* extra secure layer */}
-        {user && user.email === instructorEmail && locationCheck && (
-          <div className="p-4 flex  items-center justify-between">
-            <span
-              className={`inline-block px-2 mr-2 py-3 rounded-full font-semibold  tracking-wide  ${
-                pendingCheck
-                  ? "bg-orange-200 text-orange-800"
-                  : acceptCheck
-                  ? "bg-green-300 text-green-900"
-                  : declineCheck && "bg-red-600 text-white"
-              }`}
-            >
-              status - <span className="uppercase">{status}</span>
-            </span>
-            <div>
-              {" "}
-              <Link
-                to={`/dashboard/class-edit/${_id}`}
-                className="btn btn-secondary mr-4"
-              >
-                Update{" "}
-              </Link>
-              <button
-                onClick={() => handleDelete(_id, userRole)}
-                className="btn btn-error"
-              >
-                Delete
-              </button>{" "}
-            </div>
-          </div>
-        )}
-
-        {feedback && (
-          <div className="p-4 bg-purple-100 flex h-10 border-t items-center justify-between">
-            <p>
-              <span className="font-bold">Admin feedback :</span>{" "}
-              <span> {feedback}</span>
-            </p>
-          </div>
-        )}
 
         {userCheck === "student" || userCheck === null ? (
           <div className="p-4 bg-purple-100 flex h-16 border-t items-center justify-between">
@@ -226,4 +146,4 @@ const ClassCard = ({ product, userRole }) => {
   );
 };
 
-export default ClassCard;
+export default AllClassCard;
