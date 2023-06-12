@@ -5,12 +5,12 @@ import {
   FaCalendarAlt,
   FaHome,
   FaUtensils,
-  FaBook,
   FaUsers,
 } from "react-icons/fa";
 import useAdmin from "../../hooks/useAdmin";
 import useInstructor from "../../hooks/useInstructor";
 import useAuth from "../../hooks/useAuth";
+import { motion } from "framer-motion";
 
 const Dashboard = () => {
   // TODO: load data from the server to have dynamic isAdmin based on Data
@@ -28,6 +28,20 @@ const Dashboard = () => {
         navigate("/login");
       })
       .catch(() => {});
+  };
+
+  const menuVariants = {
+    open: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.3,
+      },
+    },
+    closed: {
+      opacity: 0,
+      x: "-100%",
+    },
   };
 
   const adminMenu = (
@@ -115,48 +129,58 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="drawer-side text-white font-semibold bg-[#014bcc]">
-        <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-        <ul className="menu p-4 w-80">
-          {/* heading */}
-          <div className="my-4 p-4 text-center border rounded-xl">
-            {isAdmin && (
-              <h1 className="text-3xl font-bold text-stone-50">
-                {" "}
-                Admin Dashboard
-              </h1>
-            )}
-            {isInstructor && (
-              <h1 className="text-3xl font-bold text-stone-50">
-                {" "}
-                Instructor Dashboard
-              </h1>
-            )}
-            {isInstructor === isAdmin && (
-              <h1 className="text-3xl font-bold text-stone-50">
-                {" "}
-                Student Dashboard
-              </h1>
-            )}
-          </div>
-          <div className="text-xl">{mainMenu()}</div>
+        {/* ... */}
+        <motion.ul
+          className="menu p-4 w-80"
+          initial="closed"
+          animate="open"
+          variants={menuVariants}
+        >
+          <div className="drawer-side  text-white font-semibold bg-[#014bcc]">
+            <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
+            <ul className="menu p-4 w-80">
+              {/* heading */}
+              <div className="my-4 px-4 mr-2 py-4 text-center border rounded-xl">
+                {isAdmin && (
+                  <h1 className="text-3xl font-bold text-stone-50">
+                    {" "}
+                    Admin Dashboard
+                  </h1>
+                )}
+                {isInstructor && (
+                  <h1 className="text-3xl font-bold text-stone-50">
+                    {" "}
+                    Instructor Dashboard
+                  </h1>
+                )}
+                {isInstructor === isAdmin && (
+                  <h1 className="text-3xl font-bold text-stone-50">
+                    {" "}
+                    Student Dashboard
+                  </h1>
+                )}
+              </div>
+              <div className="text-xl">{mainMenu()}</div>
 
-          <div className="divider  border-b border-white"></div>
+              <div className="divider  border-b border-white"></div>
 
-          <div className="text-xl">
-            {" "}
-            <li>
-              <NavLink to="/">
-                <FaHome></FaHome> Home
-              </NavLink>{" "}
-            </li>
-            <li>
-              <NavLink to="/all-classes"> All Classes</NavLink>
-            </li>
-            <li>
-              <button onClick={handleLogout}> Logout</button>
-            </li>
+              <div className="text-xl">
+                {" "}
+                <li>
+                  <NavLink to="/">
+                    <FaHome></FaHome> Home
+                  </NavLink>{" "}
+                </li>
+                <li>
+                  <NavLink to="/all-classes"> All Classes</NavLink>
+                </li>
+                <li>
+                  <button onClick={handleLogout}> Logout</button>
+                </li>
+              </div>
+            </ul>
           </div>
-        </ul>
+        </motion.ul>
       </div>
     </div>
   );
