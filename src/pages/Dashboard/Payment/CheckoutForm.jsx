@@ -3,7 +3,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
-
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ cart, price }) => {
   const stripe = useStripe();
@@ -14,6 +15,7 @@ const CheckoutForm = ({ cart, price }) => {
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (price > 0) {
@@ -83,9 +85,18 @@ const CheckoutForm = ({ cart, price }) => {
         itemNames: cart.map((item) => item.name),
       };
       axiosSecure.post("/payments", payment).then((res) => {
-        console.log(res.data);
-        if (res.data.result.insertedId) {
+        console.log(res.data.insertResult.insertedId);
+        if (res.data.insertResult.insertedId) {
           // display confirm
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Payment Success.",
+            showConfirmButton: false,
+            timer: 1000,
+          });
+          // navigate to
+          navigate("/dashboard/enrolled-classes");
         }
       });
     }
@@ -93,7 +104,10 @@ const CheckoutForm = ({ cart, price }) => {
 
   return (
     <>
-      <form className="w-2/3 m-8" onSubmit={handleSubmit}>
+      <form
+        className="w-2/3 m-8 border rounded-xl py-10 px-6"
+        onSubmit={handleSubmit}
+      >
         <CardElement
           options={{
             style: {
@@ -111,11 +125,11 @@ const CheckoutForm = ({ cart, price }) => {
           }}
         />
         <button
-          className="btn btn-primary btn-sm mt-4"
+          className="my-8 bg-teal-100 hover:bg-teal-600 font-semibold text-teal-800 hover:text-white rounded-full py-3 px-8 shadow-md hover:shadow-2xl transition duration-500 "
           type="submit"
           disabled={!stripe || !clientSecret || processing}
         >
-          Pay
+          Pay ${price}
         </button>
       </form>
       {cardError && <p className="text-red-600 ml-8">{cardError}</p>}

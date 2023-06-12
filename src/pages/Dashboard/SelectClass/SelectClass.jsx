@@ -51,11 +51,11 @@ const SelectClass = () => {
    </div>
  ) : (
    <div className="w-full">
-     <div className="uppercase font-semibold h-[60px] flex justify-evenly items-center">
+     <div className="uppercase font-semibold h-[100px] flex justify-evenly items-center">
        <h3 className="text-3xl">Total Items: {cart.length}</h3>
        <h3 className="text-3xl">Total Price: ${total}</h3>
        <Link to="/dashboard/payment">
-         <button className="btn btn-warning btn-sm">PAY</button>
+         <button className="btn btn-warning">PAY ALL Now</button>
        </Link>
      </div>
      <div className="overflow-x-auto w-full">
@@ -68,6 +68,7 @@ const SelectClass = () => {
              <th>Class Name</th>
              <th>Price</th>
              <th>Action</th>
+             <th>Pay</th>
            </tr>
          </thead>
          <tbody>
@@ -93,6 +94,11 @@ const SelectClass = () => {
                  >
                    <FaTrashAlt></FaTrashAlt>
                  </button>
+               </td>
+               <td>
+                 <Link to="/dashboard/payment" className="btn btn-warning ">
+                   Pay One
+                 </Link>
                </td>
              </tr>
            ))}

@@ -2,6 +2,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { Elements } from "@stripe/react-stripe-js";
 import useCart from "../../../hooks/useCart";
+import PayCard from "./PayCard";
 
 
 // TODO: provide publishable Key
@@ -15,7 +16,7 @@ const Payment = () => {
   const price = parseFloat(total.toFixed(2));
   return (
     <div>
-      <h2 className="text-3xl"> Teka o teka tumi uira uira aso...</h2>
+      <PayCard></PayCard>
       <Elements stripe={stripePromise}>
         <CheckoutForm cart={cart} price={price}></CheckoutForm>
       </Elements>
