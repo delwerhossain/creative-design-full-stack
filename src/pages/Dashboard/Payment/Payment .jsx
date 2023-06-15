@@ -1,19 +1,33 @@
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { Elements } from "@stripe/react-stripe-js";
-import useCart from "../../../hooks/useCart";
 import PayCard from "./PayCard";
-
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 // TODO: provide publishable Key
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 const Payment = () => {
-  const [cart] = useCart();
-  const total = cart.reduce(
-    (sum, item) => parseFloat(sum) + parseFloat(item.price),
-    0
-  );
-  const price = parseFloat(total.toFixed(2));
+  const [axiosSecure] = useAxiosSecure();
+  const params = useParams();
+  const payClassID = params.id;
+  const [cart, setCart] = useState([]);
+
+  const fetchCLassData = async (id) => {
+    axiosSecure
+      .get(`/single-class/${id}`)
+      .then((data) => {
+        setCart(data.data);
+      });
+  };
+  useEffect(() => {
+    fetchCLassData(payClassID);
+  }, []);
+
+  console.log({ payClassID, cart });
+
+  const price = parseFloat(cart.price);
   return (
     <div>
       <PayCard></PayCard>

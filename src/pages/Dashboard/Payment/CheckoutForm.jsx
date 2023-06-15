@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ cart, price }) => {
+  console.log(cart._id);
   const stripe = useStripe();
   const elements = useElements();
   const { user } = useAuth();
@@ -67,7 +68,7 @@ const CheckoutForm = ({ cart, price }) => {
     }
 
     setProcessing(false);
-    if (paymentIntent.status === "succeeded") {
+    if (paymentIntent?.status === "succeeded") {
       setTransactionId(paymentIntent.id);
       // save payment information to the server
       const payment = {
@@ -76,10 +77,9 @@ const CheckoutForm = ({ cart, price }) => {
         price,
         date: new Date(),
         quantity: cart.length,
-        cartID: cart.map((item) => item._id),
-        ClassID: cart.map((item) => item.classId),
+        classID: cart._id,
         status: "service pending",
-        ClassNames: cart.map((item) => item.name),
+        ClassNames: cart.name,
       };
       axiosSecure.post("/payments", payment).then((res) => {
         if (res.data.insertResult.insertedId) {
@@ -91,6 +91,14 @@ const CheckoutForm = ({ cart, price }) => {
             showConfirmButton: false,
             timer: 1000,
           });
+          axiosSecure
+            .put(`/update-seat/${cart._id}`, {
+              availableQuantity: cart.availableQuantity,
+              enrolled: cart.enrolled,
+            })
+            .then((res) => {
+              console.log(res.data);
+            });
           // navigate to
           navigate("/dashboard/enrolled-classes");
         }
