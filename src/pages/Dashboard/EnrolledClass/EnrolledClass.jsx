@@ -1,14 +1,13 @@
-import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Loading from "../../../Components/Loading/Loading";
 import useEnroll from "../../../hooks/useEnroll";
 
 const EnrolledClass = () => {
-  const [cart, refetch] = useEnroll();
+  const [cart] = useEnroll();
+  console.log(cart);
   // how does reduce work!!!
   // const total = cart.reduce((sum, item) => parseFloat(item.price) + sum, 0);
-console.log(cart);
+  console.log(cart);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -35,7 +34,6 @@ console.log(cart);
           <thead>
             <tr>
               <th>#</th>
-              <th>Image</th>
               <th>Class Name</th>
               <th>Price</th>
               {/* <th>status</th> */}
@@ -44,18 +42,8 @@ console.log(cart);
           <tbody>
             {cart.map((item, index) => (
               <tr key={item._id}>
-                <td>{index + 1}</td>
-                <td>
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img
-                        src={item.pictureURL}
-                        alt="Avatar Tailwind CSS Component"
-                      />
-                    </div>
-                  </div>
-                </td>
-                <td>{item.name}</td>
+                <td>{index + 1}</td>              
+                <td>{item.ClassNames}</td>
                 <td className="">${item.price}</td>
                 {/* <td className="">${item.status}</td> */}
               </tr>
