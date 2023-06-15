@@ -5,7 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useCart from "../../hooks/useCart";
 import useRole from "../../hooks/useRole";
-import {  useState } from "react";
+import { useState } from "react";
 
 const ClassCard = ({ product, userRole }) => {
   const { user } = useAuth();
@@ -34,14 +34,14 @@ const ClassCard = ({ product, userRole }) => {
     console.log(item);
     if (userRole) {
       const cartItem = {
-        classId: _id,
+        classID: _id,
         name,
         pictureURL,
         price,
         email: user.email,
       };
       axiosSecure
-        .post("http://localhost:5000/carts", { cartItem })
+        .post("https://creative-design-server.vercel.app/carts", { cartItem })
         .then((data) => {
           if (data.data.insertedId) {
             refetch(); // refetch cart to update the number of items in the cart
@@ -116,7 +116,7 @@ const ClassCard = ({ product, userRole }) => {
         setAdded(data.data);
       });
   };
-  
+
   addedCartCheck(_id);
   // conditional rendering for card actions
   const pendingCheck = status == "pending";
@@ -127,7 +127,11 @@ const ClassCard = ({ product, userRole }) => {
   ////////////////////////
   return (
     <div className="w-full sm:w-1/2 md:w-1/2 xl:w-2/4 p-4">
-      <div className="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
+      <div
+        className={`c-card block  shadow-md hover:shadow-xl rounded-lg overflow-hidden ${
+          availableQuantity == 0 ? "bg-red-100" : "bg-white"
+        } `}
+      >
         <div className="relative pb-56 lg:pb-96 overflow-hidden">
           <img
             className="absolute inset-0 w-full "
@@ -198,11 +202,11 @@ const ClassCard = ({ product, userRole }) => {
           </div>
         )}
 
-        {feedback && (
-          <div className="p-4 bg-purple-100 flex h-10 border-t items-center justify-between">
+        {!feedback == "" && (
+          <div className="p-4  bg-purple-200 flex border-t items-center justify-between">
             <p>
-              <span className="font-bold">Admin feedback :</span>{" "}
-              <span> {feedback}</span>
+              <span className="font-bold text-2xl">Admin feedback :</span>{" "}
+              <span className="text-xl"> {feedback}</span>
             </p>
           </div>
         )}
@@ -212,8 +216,14 @@ const ClassCard = ({ product, userRole }) => {
             <button
               onClick={() => handleAddToCart(_id, userRole)}
               className={`p-3  font-bold rounded-xl ${
-                added ? "bg-blue-200 text-blue-800" : "bg-green-700 text-white"
-              }`}
+                availableQuantity == 0
+                  ? "bg-stone-400 text-stone-800"
+                  : added
+                  ? "bg-blue-200 text-blue-800"
+                  : "bg-green-700 text-white"
+              }            
+              `}
+              disabled={availableQuantity == 0}
             >
               {added ? "Add to Card" : "Added"}
             </button>

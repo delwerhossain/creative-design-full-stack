@@ -39,7 +39,7 @@ const AllClassCard = ({ product, userRole }) => {
         email: user.email,
       };
       axiosSecure
-        .post("http://localhost:5000/carts", { cartItem })
+        .post("https://creative-design-server.vercel.app/carts", { cartItem })
         .then((data) => {
           if (data.data.insertedId) {
             refetch(); // refetch cart to update the number of items in the cart
@@ -77,9 +77,11 @@ const AllClassCard = ({ product, userRole }) => {
   };
 
   const addedCartCheck = (id) => {
-    axiosSecure.get(`/addedCartCheck/${id}?email=${user.email}`).then((data) => {
-      setAdded(data.data);
-    });
+    axiosSecure
+      .get(`/addedCartCheck/${id}?email=${user.email}`)
+      .then((data) => {
+        setAdded(data.data);
+      });
   };
 
   addedCartCheck();
