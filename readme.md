@@ -1,6 +1,8 @@
 # Creative Design School Web Application
 
-<a href="https://creative-design-school.web.app/" target="_blank"><img src="https://shorturl.at/dhH27" alt="Logo" height="120" width="200"></a>
+
+<a href="https://creative-design-school.web.app/" target="_blank">Live Link </a>
+
 
 This is the README file for the Creative Design School web application, which is a platform that offers various design courses. The application allows users to register as students, instructors, or administrators. It provides a user-friendly interface for users to explore, register for classes, and manage their profiles.
 
