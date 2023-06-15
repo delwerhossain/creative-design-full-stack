@@ -4,20 +4,20 @@ import { FiLogIn, FiLogOut } from "react-icons/fi";
 import useAuth from "../../../hooks/useAuth";
 import useCart from "../../../hooks/useCart";
 import useRole from "../../../hooks/useRole";
-import {FaChalkboardTeacher} from "react-icons/fa";
+import { FaChalkboardTeacher } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [cart] = useCart();
   const [userCheck] = useRole();
- 
+
   // // user role chcek
   // const [userCheck, setUserCheck] = useState("");
 
   // const userRole = async () => {
   //   try {
   //     const response = await axios.post(
-  //       "http://localhost:5000/check-user-role",
+  //       "https://creative-design-server.vercel.app/check-user-role",
   //       {
   //         email: user?.email,
   //       }
@@ -106,7 +106,7 @@ const Navbar = () => {
         </li>
         <li>
           <Link to={"/all-instructor"}>
-      <FaChalkboardTeacher/>
+            <FaChalkboardTeacher />
             All-instructor
           </Link>
         </li>

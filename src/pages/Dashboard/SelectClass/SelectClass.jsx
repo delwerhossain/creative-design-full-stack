@@ -21,7 +21,7 @@ const SelectClass = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/carts/${item._id}`, {
+        fetch(`https://creative-design-server.vercel.app/carts/${item._id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -35,78 +35,81 @@ const SelectClass = () => {
     });
   };
 
- const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
- useEffect(() => {
-   if (loading) {
-     setTimeout(() => {
-       setLoading(false);
-     }, 300);
-   }
- }, []);
+  useEffect(() => {
+    if (loading) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 300);
+    }
+  }, []);
 
- return loading ? (
-   <div className="grid justify-center items-center">
-     <Loading></Loading>
-   </div>
- ) : (
-   <div className="w-full">
-     <div className="uppercase font-semibold h-[100px] flex justify-evenly items-center">
-       <h3 className="text-3xl">Total Items: {cart.length}</h3>
-       <h3 className="text-3xl">Total Price: ${total}</h3>
-       <Link to="/dashboard/payment">
-         <button className="btn btn-warning">PAY ALL Now</button>
-       </Link>
-     </div>
-     <div className="overflow-x-auto w-full">
-       <table className="table w-full">
-         {/* head */}
-         <thead>
-           <tr>
-             <th>#</th>
-             <th>Image</th>
-             <th>Class Name</th>
-             <th>Price</th>
-             <th>Action</th>
-             <th>Pay</th>
-           </tr>
-         </thead>
-         <tbody>
-           {cart.map((item, index) => (
-             <tr key={item._id}>
-               <td>{index + 1}</td>
-               <td>
-                 <div className="avatar">
-                   <div className="mask mask-squircle w-12 h-12">
-                     <img
-                       src={item.pictureURL}
-                       alt="Avatar Tailwind CSS Component"
-                     />
-                   </div>
-                 </div>
-               </td>
-               <td>{item.name}</td>
-               <td className="">${item.price}</td>
-               <td>
-                 <button
-                   onClick={() => handleDelete(item)}
-                   className="btn btn-ghost bg-red-600  text-white"
-                 >
-                   <FaTrashAlt></FaTrashAlt>
-                 </button>
-               </td>
-               <td>
-                 <Link to="/dashboard/payment" className="btn btn-warning ">
-                   Pay One
-                 </Link>
-               </td>
-             </tr>
-           ))}
-         </tbody>
-       </table>
-     </div>
-   </div>
- );
+  return loading ? (
+    <div className="grid justify-center items-center">
+      <Loading></Loading>
+    </div>
+  ) : (
+    <div className="w-full">
+      <div className="uppercase font-semibold h-[100px] flex justify-evenly items-center">
+        <h3 className="text-3xl">Total Items: {cart.length}</h3>
+        <h3 className="text-3xl">Total Price: ${total}</h3>
+        {/* <Link to="/dashboard/payment">
+          <button className="btn btn-warning">PAY ALL Now</button>
+        </Link> */}
+      </div>
+      <div className="overflow-x-auto w-full">
+        <table className="table w-full">
+          {/* head */}
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Image</th>
+              <th>Class Name</th>
+              <th>Price</th>
+              <th>Action</th>
+              <th>Pay</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cart.map((item, index) => (
+              <tr key={item._id}>
+                <td>{index + 1}</td>
+                <td>
+                  <div className="avatar">
+                    <div className="mask mask-squircle w-12 h-12">
+                      <img
+                        src={item.pictureURL}
+                        alt="Avatar Tailwind CSS Component"
+                      />
+                    </div>
+                  </div>
+                </td>
+                <td>{item.name}</td>
+                <td className="">${item.price}</td>
+                <td>
+                  <button
+                    onClick={() => handleDelete(item)}
+                    className="btn btn-ghost bg-red-600  text-white"
+                  >
+                    <FaTrashAlt></FaTrashAlt>
+                  </button>
+                </td>
+                <td>
+                  <Link
+                    to={`/dashboard/payment/${item.classID}`}
+                    className="btn btn-warning "
+                  >
+                    Pay One
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 };
 
 export default SelectClass;

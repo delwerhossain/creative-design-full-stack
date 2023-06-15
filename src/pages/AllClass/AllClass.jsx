@@ -10,14 +10,17 @@ const AllClass = () => {
   useEffect(() => {
     try {
       const fetchData = async () => {
-        const res = await fetch("http://localhost:5000/all-class", {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ mail: user?.email }),
-        });
+        const res = await fetch(
+          "https://creative-design-server.vercel.app/all-class",
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ mail: user?.email }),
+          }
+        );
         const data = await res.json();
         setClasses(data?.result);
         setUserCheck(data?.userCheck);

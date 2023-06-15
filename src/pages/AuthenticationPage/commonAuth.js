@@ -1,8 +1,8 @@
 import Swal from "sweetalert2";
 
 export const userInsert = (name, email, img) => {
-  const saveUser = { name: name, email: email, img: img, role: 'student' };
-  fetch("http://localhost:5000/users", {
+  const saveUser = { name: name, email: email, img: img, role: "student" };
+  fetch("https://creative-design-server.vercel.app/users", {
     method: "POST",
     headers: {
       "content-type": "application/json",
