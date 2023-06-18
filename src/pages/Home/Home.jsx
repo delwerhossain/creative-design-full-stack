@@ -8,6 +8,9 @@ import useAuth from "../../hooks/useAuth";
 import ContactPart from "./ContactPart";
 import InstructorPart from "./InstructorPart";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import ProductFeatures from "./ProductFeatures";
+import ProductOverviews from "./ProductOverviews";
+import PricingSections from "./PricingSections";
 
 const Home = () => {
   // for popular classes
@@ -65,17 +68,16 @@ const Home = () => {
   ) : (
     <div>
       <motion.div
-       initial={{ scale: 0 }}
-      animate={{ scale: 1 }}
-      transition={{ duration: 1.5 }}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.5 }}
       >
         <TopSlider></TopSlider>
       </motion.div>
-
       <motion.div
-       initial={{ scale: 0 }}
-      animate={{ scale: 1 }}
-      transition={{ duration: 1.5 }}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.5 }}
       >
         {/*  popular  */}
         <div className="text-center p-10">
@@ -88,20 +90,19 @@ const Home = () => {
           ))}
         </section>
       </motion.div>
-
       <motion.div
-       initial={{ scale: 0 }}
-      animate={{ scale: 1 }}
-      transition={{ duration: 1.5 }}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.5 }}
       >
         {/* instructor part */}
         <div>
           <div className="text-center p-10">
             <h1 className="font-bold text-4xl mb-4">Our Popular Instructors</h1>
-            <h1 className="text-3xl">Creation of Design</h1>
           </div>
+
           <section className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
-            {instructors.slice(0, 6).map((instructor) => (
+            {instructors.slice(0, 4).map((instructor) => (
               <InstructorPart
                 key={instructor._id}
                 instructor={instructor}
@@ -110,15 +111,26 @@ const Home = () => {
           </section>
         </div>
       </motion.div>
-
       <motion.div
-       initial={{ scale: 0 }}
-      animate={{ scale: 1 }}
-      transition={{ duration: 1.5 }}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.5 }}
       >
         {/* Contact part */}
         <ContactPart />
       </motion.div>
+      <motion.div
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.5 }}
+      >
+        {/* Contact part */}
+        <ProductFeatures />
+      </motion.div>
+      {/* ProductOverviews */}
+      <ProductOverviews />
+      {/* PricingSections */}
+      <PricingSections />
     </div>
   );
 };
